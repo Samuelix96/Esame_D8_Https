@@ -1,0 +1,38 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+header {
+    padding: 10px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+nav .nav-item:hover {
+    background-color: lightgreen;
+    opacity: 0.5;
+
+}
+.manga {
+    background-color: black;
+    border-radius: 50%;
+    padding: 10px;
+}
+#box-products {
+ display: flex;
+ flex-wrap: wrap;
+ gap: 20px;
+}
+
+.card {
+    width: 200px;
+    
+}
+
+.alert {
+    height: 20vh;
+    display: flex;
+    justify-content: center;
+}
