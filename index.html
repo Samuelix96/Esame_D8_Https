@@ -10,10 +10,10 @@
     <title>Shop Store</title>
 </head>
 
-<body>
+<body id="body-main">
 
     <div id="alert-container" class="alert alert-success d-none" role="alert">
-        
+
     </div>
 
 
@@ -32,17 +32,14 @@
                     <li class="nav-item  mx-4">
                         <a class="nav-link" href="user-page.html">Modify</a>
                     </li>
-                    <li class="nav-item mx-4">
-                        <a class="nav-link" href="#">Pricing</a>
-                    </li>
-
+                    
                 </ul>
             </div>
         </div>
     </nav>
 
     <header class="my-3">
-        <h1 class="fw-semibold text-success">MANGA and COMICS</h1>
+        <h1 class="title fw-semibold text-random" >MANGA and COMICS</h1>
         <button type="button" onclick="Addmanga()" class="btn btn-success btn-lg">Aggiungi Fumetto</button>
     </header>
 
@@ -52,7 +49,11 @@
     </div>
 
 
-
+    <div class="spinner-container">
+        <div id="spinner-row" class="spinner-border" role="status">
+            <span class="visually-hidden">caricamento...</span>
+        </div>
+    </div>
 
 
 

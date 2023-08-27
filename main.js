@@ -4,8 +4,7 @@ const API_URL = "https://striveschool-api.herokuapp.com/api/"
 async function fetchProducts() {
   try {
 
-    
-
+    handleAlertMessage()
 
     const response = await fetch(`${API_URL}product/`, {
       headers: {
@@ -14,7 +13,15 @@ async function fetchProducts() {
     });
 
     const data = await response.json();
+
+    setTimeout( () => {
+      document.querySelector('.spinner-container').classList.add('d-none');
+      displayProducts(data);
+    }, 800)
+    
     return data; 
+
+    
   } catch (error) {
     throw new Error('Errore nel recupero dei prodotti: ' + error);
   }
@@ -33,22 +40,22 @@ function displayProducts(product) {
     const immagine = decodeURIComponent(elemento.imageUrl);
     const prezzo = decodeURIComponent(elemento.price);
     const userId = decodeURIComponent(elemento._id);
-    console.log(userId)
+    
 
     const row = `
     <div class="card  my-3 " >
       <img src="${immagine}" class="img-fluid">
       <div class="card-body">
-        <h5 class="card-title">${nome}</h5>
+        <h3 class="card-title">${nome}</h3>
         <p class="card-text">${descrizione}</p>
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">${marca}</li>
-        <li class="list-group-item">${prezzo}</li>
-        <li class="list-group-item">${userId}</li>
+        <li class="list-group-item">${prezzo} €</li>
+        <li class="list-group-item d-none">${userId}</li>
       </ul>
-      <button class="btn btn-primary my-1" onclick="editUser('${userId}')">Modifica </button>
-      <button class="btn btn-primary" onclick="deleteUser('${userId}')">Cancella </button> 
+      <button class="btn btn-success my-1" onclick="editUser('${userId}')">Modifica </button>
+      <button class="btn btn-danger" onclick="deleteUser('${userId}')">Cancella </button> 
     </div>`;
 
     rowProducts.innerHTML += row;
@@ -95,8 +102,29 @@ async function deleteUser(userId) {
   
 }
 
-function editUser(userId) {
-  window.location.href = `user-page.html?id=${userId}`
+
+  function editUser(userId) {
+    
+    const updatedUrl = `user-page.html?id=${userId}&status=edit-ok`;
+  
+    window.location.replace(updatedUrl);
+  }
+  
+
+function showAlert(actionType) {
+  const alertCnt = document.getElementById('alert-container');
+  alertCnt.classList.remove('d-none');
+  alertCnt.innerHTML = actionType === 'create'
+    ? 'Utente creato con successo'
+    : actionType === 'update'
+      ? 'Utente modificato con successo'
+      : 'Utente eliminato con successo'
+
+  setTimeout( () => {
+    alertCnt.classList.add('d-none');
+  }, 2000)
+
+  
 }
 
 
@@ -118,87 +146,13 @@ function clearQueryString() {
   window.history.replaceState({}, '', url.toString());
 }
 
-function showAlert(actionType) {
-  const alertCnt = document.getElementById('alert-container');
-  alertCnt.classList.remove('d-none');
-  alertCnt.innerHTML = actionType === 'create'
-    ? 'Utente creato con successo'
-    : actionType === 'update'
-      ? 'Utente modificato con successo'
-      : 'Utente eliminato con successo'
 
-  setTimeout( () => {
-    alertCnt.classList.add('d-none');
-  }, 3000)
-}
-showAlert()
+
+fetchProducts()
 
 
 
 
 
 
-// async function fetchUsers() {
 
-//   try {
-//     const response = await fetch(`${API_URL}product/`, {
-//       headers: {
-//         "Authorization":
-//           "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGVhMWUyODUxNWY0MTAwMTQ2OTc5OTQiLCJpYXQiOjE2OTMwNjQ3NDQsImV4cCI6MTY5NDI3NDM0NH0.unfgWsztbeHWcIAUbPP1iGJTDyExsF4OTodeIhTla5g"
-//       }
-//     });
-
-
-//     const data = await response.json();
-//     console.log(data);
-
-//     // AGGIUNGERE UTENTI ALLA TABELLA
-    
-
-//   } catch (error) {
-//     console.log('Errore nel recupero degli utenti: ', error);
-//   }
-// }
-// fetchUsers()
-
-
-
-// function display(product) {
-
-//   const rowProducts = document.getElementById('box-products');
-//   console.log(rowProducts);
-//   rowProducts.innerHTML = ''
-
-  
-
-//   product.forEach(elemento => { 
-
-//     const nome  = decodeURIComponent(elemento.name)
-//     const descrizione = decodeURIComponent(elemento.description)
-//     const marca = decodeURIComponent(elemento.brand)
-//     const immagine = decodeURIComponent(elemento.imageUrl)
-//     const prezzo = decodeURIComponent(elemento.price)
-//     const id = decodeURIComponent(elemento._id)
-
-//     const row = `
-//     <div class="card" style="width: 18rem;">
-//     <img src=" ${immagine} " class= alt="...">
-//     <div class="card-body">
-//       <h5 class="card-title">${nome} </h5>
-//       <p class="card-text">${descrizione}</p>
-//     </divproducts
-//     <ul class="list-group list-group-flush">
-//       <li class="list-group-item">${marca}</li>
-//       <li class="list-group-item">${prezzo}</li>
-//     </ul>
-//     `
-
-//     rowProducts.innerHTML += row
-    
-//   });
-
-  
-
-// }
-
-// display(product)

@@ -23,66 +23,63 @@ function onEditUser() {
 } 
 
 
-form.addEventListener('submit', async (event) => {
-    event.preventDefault();
 
-    const validation = handleFormValidation();
-    if (!validation) return false;
 
-    const product = {
-        name: nameInput.value,
-        description: descriptionInput.value,
-        brand: brandInput.value,
-        imageUrl: imageInput.value,
-        price: priceInput.value
-    }
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
     
+        const validation = handleFormValidation();
+        if (!validation) return false;
     
-    try {
-
-        if (userIdInput.value) {
-            const response = await fetch(`${API_URL}product/${userIdInput.value}`, {
-                method: 'PUT',
-                body: JSON.stringify(product),
-                headers: {
-                    "Content-type": "application/json; charset=UTF-8",
-                    "Authorization": 
-                    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGVhMWUyODUxNWY0MTAwMTQ2OTc5OTQiLCJpYXQiOjE2OTMwNjQ3NDQsImV4cCI6MTY5NDI3NDM0NH0.unfgWsztbeHWcIAUbPP1iGJTDyExsF4OTodeIhTla5g"
-                }
-            })
-
-        if (response.ok) {
-            window.location.href = 'index.html'
-        } else {
-            alert('Si è verificato un errore durante la creazione dell\'utente.')
-          }
-            console.log('AGGIORNA UTENTE')
-        } else {
-            
-            const response = await fetch(`${API_URL}product/`, {
-                method: 'POST',
-                body: JSON.stringify(product),
-                headers: {
-                    "Content-type": "application/json; charset=UTF-8",
-                    "Authorization": 
-                    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGVhMWUyODUxNWY0MTAwMTQ2OTc5OTQiLCJpYXQiOjE2OTMwNjQ3NDQsImV4cCI6MTY5NDI3NDM0NH0.unfgWsztbeHWcIAUbPP1iGJTDyExsF4OTodeIhTla5g"
-                    
-                }
-                
-            }) 
+        const product = {
+            name: nameInput.value,
+            description: descriptionInput.value,
+            brand: brandInput.value,
+            imageUrl: imageInput.value,
+            price: priceInput.value
         }
+    
+        let response; 
+        try {
+            if (userIdInput.value) {
+                response = await fetch(`${API_URL}product/${userIdInput.value}`, {
+                    method: 'PUT',
+                    body: JSON.stringify(product),
+                    headers: {
+                        "Content-type": "application/json; charset=UTF-8",
+                        "Authorization": 
+                        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGVhMWUyODUxNWY0MTAwMTQ2OTc5OTQiLCJpYXQiOjE2OTMwNjQ3NDQsImV4cCI6MTY5NDI3NDM0NH0.unfgWsztbeHWcIAUbPP1iGJTDyExsF4OTodeIhTla5g"
+                    }
+                });
+    
+                if (response.ok) {
+                    window.location.href = 'index.html';
+                } else {
+                    alert('Si è verificato un errore durante la modifica del prodotto.');
+                }
+            } else {
+                response = await fetch(`${API_URL}product/`, {
+                    method: 'POST',
+                    body: JSON.stringify(product),
+                    headers: {
+                        "Content-type": "application/json; charset=UTF-8",
+                        "Authorization": 
+                        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGVhMWUyODUxNWY0MTAwMTQ2OTc5OTQiLCJpYXQiOjE2OTMwNjQ3NDQsImV4cCI6MTY5NDI3NDM0NH0.unfgWsztbeHWcIAUbPP1iGJTDyExsF4OTodeIhTla5g"
+                    }
+                });
+    
+                if (response.ok) {
+                    window.location.href = 'index.html';
+                } else {
+                    alert('Si è verificato un errore durante la creazione del prodotto.');
+                }
+            }
+        } catch (error) {
+            console.log('Errore durante la richiesta API:', error);
+        }
+    });
+    
 
-        
-
-        if (response.ok) {
-            window.location.href = 'index.html'
-        } else {
-            alert('Si è verificato un errore durante la creazione dell\'utente.')
-          }
-    } catch (error) {
-        console.log('Errore nel recupero degli utenti');
-    }
-})
 
 
 
@@ -168,11 +165,7 @@ async function getProductData() {
 
             console.log(user);
             
-            setTimeout( () => {
-              document.querySelector('.spinner-container').classList.add('d-none');
-              document.querySelector('#user-form').classList.remove('d-none');
-            }, 500)
-      
+            
             if (!('name' in user)) {
               console.log('L\'utente non esiste');
               return
