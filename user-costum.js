@@ -6,12 +6,14 @@ console.log(form);
 
 
 const userIdInput = document.getElementById('user-id');
+
 const nameInput = document.getElementById('name')
 console.log(nameInput.value);
 const descriptionInput = document.getElementById('description')
 const brandInput = document.getElementById('brand')
 const imageInput = document.getElementById('image')
 const priceInput = document.getElementById('price')
+
 
 let ON_EDITING = false
 
@@ -36,7 +38,9 @@ function onEditUser() {
             description: descriptionInput.value,
             brand: brandInput.value,
             imageUrl: imageInput.value,
-            price: priceInput.value
+            price: priceInput.value,
+            
+            
         }
     
         let response; 

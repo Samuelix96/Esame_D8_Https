@@ -56,10 +56,15 @@ function displayProducts(product) {
       </ul>
       <button class="btn btn-success my-1" onclick="editUser('${userId}')">Modifica </button>
       <button class="btn btn-danger" onclick="deleteUser('${userId}')">Cancella </button> 
+      <button class="btn btn-dark" onclick="openDetail('${userId}')">Pagina Prodotto</button> 
     </div>`;
 
     rowProducts.innerHTML += row;
   });
+}
+
+function openDetail(userId) {
+  window.location.href = `dettaglio.html?id=${userId}`;
 }
 
 

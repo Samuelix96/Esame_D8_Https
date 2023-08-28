@@ -5,7 +5,7 @@
     font-family: 'Pacifico';
 }
 
-#body-main{
+#body-main {
     background: rgb(238, 174, 202);
     background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(57, 10, 84, 1) 13%, rgba(117, 100, 111, 1) 51%, rgba(111, 96, 106, 1) 52%, rgba(60, 53, 208, 1) 85%, rgba(34, 48, 47, 1) 100%);
 }
@@ -66,3 +66,61 @@ nav .nav-item:hover {
     border-radius: 30px;
     padding: 20px;
 }
+
+#title-dettails {
+    display: flex;
+    justify-content: center;
+    font-family: 'Pacifico', cursive;
+    font-size: 4rem;
+
+    text-transform: uppercase;
+    background-image: linear-gradient(-225deg,
+            #231557 0%,
+            #44107a 29%,
+            #ff1361 67%,
+            #fff800 100%);
+    background-size: auto auto;
+    background-clip: border-box;
+    background-size: 200% auto;
+    color: #fff;
+    background-clip: text;
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textclip 2s linear infinite;
+
+
+}
+
+@keyframes textclip {
+    to {
+        background-position: 200% center;
+    }
+}
+
+
+#product-details {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.col-md-4 img {
+
+    padding: 1rem;
+}
+
+#body-details {
+    background: rgb(34, 189, 195);
+    background: linear-gradient(0deg, rgba(34, 189, 195, 1) 22%, rgba(142, 156, 210, 1) 42%, rgba(227, 187, 156, 1) 78%);
+}
+
+.spin {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 90vh;
+        color: white;
+        
+    
+    }
